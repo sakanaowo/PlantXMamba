@@ -1,0 +1,42 @@
+dataset:
+  embrapa:
+    image_size: [ 224,224 ]
+    data_dir: "./data/raw/embrapa"
+  #    label_encoder: "./data/processed/embrapa/embrapa_label_encoder.pkl"
+
+  apple:
+    image_size: [ 224, 224 ]
+    data_dir: "./data/raw/plant-pathology-2020-fgvc7/images"
+    csv_path: "./data/raw/plant-pathology-2020-fgvc7/train.csv"
+    label_encoder: "./data/processed/apple_label_encoder.pkl"
+
+  plant_village:
+    image_size: [ 224, 224 ]
+    data_dir: "./data/raw/plantvillage"
+
+training:
+  batch_size: 16
+  epochs: 50
+  learning_rate: 0.0001
+  optimizer: "adam"
+  loss: "categorical_crossentropy"
+
+model:
+  patch_size: 5
+  transformer_block: 4
+  embedding_dim: 16
+  dropout_rate: 0.1
+
+output:
+  embrapa:
+    save_dir: "./outputs/embrapa"
+    model_path: "./outputs/embrapa/models/PlantXMamba_embrapa.pth"
+    log_dir: "./outputs/embrapa/logs"
+  apple:
+    save_dir: "./outputs/apple"
+    model_path: "./outputs/models/apple/PlantXMamba_apple.pth"
+    log_dir: "./outputs/apple/logs"
+  plantvillage:
+    save_dir: "./outputs/plantvillage"
+    model_path: "./outputs/models/plantvillage/PlantXMamba_plantvillage.pth"
+    log_dir: "./outputs/plantvillage/logs"
