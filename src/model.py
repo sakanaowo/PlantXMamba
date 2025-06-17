@@ -123,7 +123,7 @@ class PlantXMamba(nn.Module):
 
 # Kiểm tra mô hình
 if __name__ == "__main__":
-    model = PlantXViT(num_classes=4, patch_size=5, emb_size=16, num_blocks=4, dropout=0.1)
+    model = PlantXMamba(num_classes=4, patch_size=5, emb_size=16, num_blocks=4, dropout=0.1)
     x = torch.randn(2, 3, 224, 224)
     output = model(x)
     print(output.shape)  # Mong đợi: torch.Size([2, 4])
