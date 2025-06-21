@@ -2,11 +2,10 @@ import torch
 import torch.nn as nn
 import torchvision.models as models
 from torchvision.models import VGG16_Weights
-# import sys
-# sys.path.append("./mamba_ssm")
+
+
 from mamba_ssm import Mamba2
 
-# InceptionBlock
 class InceptionBlock(nn.Module):
     def __init__(self, in_channels=128):
         super(InceptionBlock, self).__init__()
@@ -57,7 +56,6 @@ class InceptionBlock(nn.Module):
         b4 = self.branch_pool(x)
         return torch.cat([b1, b2, b3, b4], dim=1)  # Tổng: 128 + 128 + 128 + 64 = 384
 
-# PatchEmbedding
 class PatchEmbedding(nn.Module):
     def __init__(self, in_channels=384, patch_size=5, emb_size=16):
         super().__init__()
@@ -71,10 +69,9 @@ class PatchEmbedding(nn.Module):
         x = x.permute(0, 2, 3, 1, 4, 5).contiguous()
         x = x.view(B, -1, C * self.patch_size * self.patch_size)
         return self.proj(x)  # shape: (B, num_patches, emb_size)
-
-# MambaBlock
+    
 class MambaBlock(nn.Module):
-    def __init__(self, emb_size=16, d_state=64, d_conv=4, expand=2):
+    def __init__(self, emb_size=16, d_state=64, d_conv=4, expand=4):
         super().__init__()
         self.norm = nn.LayerNorm(emb_size)
         self.mamba = Mamba2(
@@ -97,8 +94,7 @@ class MambaBlock(nn.Module):
         x = residual + x
         x = x + self.mlp(self.norm(x))
         return self.dropout(x)
-
-
+    
 class PlantXMamba(nn.Module):
     def __init__(self, num_classes=4, patch_size=5, emb_size=16, num_blocks=4, dropout=0.1):
         super().__init__()
@@ -106,7 +102,7 @@ class PlantXMamba(nn.Module):
         self.vgg_block = nn.Sequential(*list(vgg.features[:10]))
         self.inception = InceptionBlock(in_channels=128)
         self.patch_embed = PatchEmbedding(in_channels=384, patch_size=patch_size, emb_size=emb_size)
-        self.transformer = nn.Sequential(*[MambaBlock(emb_size=emb_size, d_state=64, d_conv=4, expand=2) for _ in range(num_blocks)])
+        self.transformer = nn.Sequential(*[MambaBlock(emb_size=emb_size, d_state=64, d_conv=4, expand=4) for _ in range(num_blocks)])
         self.norm = nn.LayerNorm(emb_size)
         self.global_pool = nn.AdaptiveAvgPool1d(1)
         self.classifier = nn.Linear(emb_size, num_classes)

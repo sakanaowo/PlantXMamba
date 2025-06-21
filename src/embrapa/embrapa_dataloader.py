@@ -3,7 +3,7 @@ import os.path
 from torchvision import transforms
 from torch.utils.data import DataLoader
 
-from utils.preprocess_embrapa import embrapa_transform
+from src.embrapa.preprocess_embrapa import embrapa_transform
 
 # Root thư mục chứa ảnh
 image_root = "./data/raw/embrapa"
