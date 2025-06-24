@@ -1,8 +1,10 @@
 # Copyright (c) 2023, Tri Dao, Albert Gu.
+import sys
 
 import torch
 import torch.nn.functional as F
 from mamba_ssm.utils.torch import custom_bwd, custom_fwd
+from causal_conv1d import causal_conv1d_fn
 
 from einops import rearrange, repeat
 
@@ -11,6 +13,7 @@ try:
     from causal_conv1d.cpp_functions import causal_conv1d_fwd_function, causal_conv1d_bwd_function, \
         causal_conv1d_update_function
 except ImportError:
+    print("Import causal error:", sys.exc_info())
     causal_conv1d_fn = None
     causal_conv1d_fwd_function = None
     causal_conv1d_bwd_function = None
@@ -191,12 +194,9 @@ class MambaInnerFn(torch.autograd.Function):
                 A, B=None, C=None, D=None, delta_bias=None, B_proj_bias=None,
                 C_proj_bias=None, delta_softplus=True, checkpoint_lvl=1, b_rms_weight=None, c_rms_weight=None,
                 dt_rms_weight=None, b_c_dt_rms_eps=1e-6):
-        """
-             xz: (batch, dim, seqlen)
-        """
-        from causal_conv1d import causal_conv1d_fn
+        print("causal imported into MambaInnerFn:", causal_conv1d_fn)
         causal_conv1d_fwd_function = causal_conv1d_fn
-        assert causal_conv1d_fwd_function is not None, "causal_conv1d_cuda is not available. Please install causal-conv1d."
+        # assert causal_conv1d_fwd_function is not None, "causal_conv1d_cuda is not available. Please install causal-conv1d."
         assert checkpoint_lvl in [0, 1]
         L = xz.shape[-1]
         delta_rank = delta_proj_weight.shape[1]
