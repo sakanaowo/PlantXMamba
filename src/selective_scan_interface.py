@@ -4,7 +4,7 @@ import sys
 import torch
 import torch.nn.functional as F
 from mamba_ssm.utils.torch import custom_bwd, custom_fwd
-from causal_conv1d import causal_conv1d_fn
+from causal_conv1d import causal_conv1d_fn, causal_conv1d_fwd_function
 
 from einops import rearrange, repeat
 
