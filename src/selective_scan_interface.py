@@ -4,7 +4,7 @@ import sys
 import torch
 import torch.nn.functional as F
 from mamba_ssm.utils.torch import custom_bwd, custom_fwd
-from causal_conv1d import causal_conv1d_fn, causal_conv1d_fwd_function
+
 
 from einops import rearrange, repeat
 
@@ -194,6 +194,7 @@ class MambaInnerFn(torch.autograd.Function):
                 A, B=None, C=None, D=None, delta_bias=None, B_proj_bias=None,
                 C_proj_bias=None, delta_softplus=True, checkpoint_lvl=1, b_rms_weight=None, c_rms_weight=None,
                 dt_rms_weight=None, b_c_dt_rms_eps=1e-6):
+        from causal_conv1d import causal_conv1d_fn, causal_conv1d_fwd_function
         print("causal imported into MambaInnerFn:", causal_conv1d_fn)
         causal_conv1d_fwd_function = causal_conv1d_fn
         # assert causal_conv1d_fwd_function is not None, "causal_conv1d_cuda is not available. Please install causal-conv1d."
