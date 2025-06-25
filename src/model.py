@@ -4,7 +4,8 @@ import torchvision.models as models
 from torchvision.models import VGG16_Weights
 
 
-from mamba_block.model import Mamba2
+from mamba_block.model import MambaModule
+# from mamba_ssm import Mamba2
 
 class InceptionBlock(nn.Module):
     def __init__(self, in_channels=128):
@@ -70,16 +71,43 @@ class PatchEmbedding(nn.Module):
         x = x.view(B, -1, C * self.patch_size * self.patch_size)
         return self.proj(x)  # shape: (B, num_patches, emb_size)
     
+# class MambaBlock(nn.Module):
+#     def __init__(self, emb_size=16, d_state=64, d_conv=4, expand=4):
+#         super().__init__()
+#         self.norm = nn.LayerNorm(emb_size)
+#         self.mamba = Mamba2(
+#             d_model=emb_size,
+#             d_state=d_state,
+#             d_conv=d_conv,
+#             expand=expand
+#         )
+#         self.mlp = nn.Sequential(
+#             nn.Linear(emb_size, emb_size * 2),
+#             nn.GELU(),
+#             nn.Linear(emb_size * 2, emb_size)
+#         )
+#         self.dropout = nn.Dropout(0.3)
+
+#     def forward(self, x):
+#         residual = x
+#         x = self.norm(x)
+#         x = self.mamba(x)
+#         x = residual + x
+#         x = x + self.mlp(self.norm(x))
+#         return self.dropout(x)
+
 class MambaBlock(nn.Module):
-    def __init__(self, emb_size=16, d_state=64, d_conv=4, expand=4):
+    def __init__(self, emb_size=16, d_state=64, d_conv=4, expand=4, n_layers=2):
         super().__init__()
         self.norm = nn.LayerNorm(emb_size)
-        self.mamba = Mamba2(
-            d_model=emb_size,
-            d_state=d_state,
-            d_conv=d_conv,
-            expand=expand
-        )
+        class Args:
+            d_model = emb_size
+            d_state = d_state
+            d_conv = d_conv
+            expand = expand
+            n_layers = n_layers
+        args = Args()
+        self.mamba = MambaModule(args)
         self.mlp = nn.Sequential(
             nn.Linear(emb_size, emb_size * 2),
             nn.GELU(),
@@ -94,7 +122,7 @@ class MambaBlock(nn.Module):
         x = residual + x
         x = x + self.mlp(self.norm(x))
         return self.dropout(x)
-    
+
 class PlantXMamba(nn.Module):
     def __init__(self, num_classes=4, patch_size=5, emb_size=16, num_blocks=4, dropout=0.1):
         super().__init__()
