@@ -103,10 +103,10 @@ class MambaBlock(nn.Module):
         self.norm = nn.LayerNorm(emb_size)
         class Args:
             d_model = emb_size
-            d_state = d_state
-            d_conv = d_conv
-            expand = expand
-            n_layers = n_layers
+            d_state = d_state  # Sử dụng tham số từ __init__
+            d_conv = d_conv    # Sử dụng tham số từ __init__
+            expand = expand    # Sử dụng tham số từ __init__
+            n_layers = n_layers  # Sử dụng tham số từ __init__
         args = Args()
         self.mamba = MambaModule(args)
         self.mlp = nn.Sequential(
