@@ -64,7 +64,7 @@ class MambaModule(nn.Module):
                            d_state=self.args.d_state, d_conv=self.args.d_conv, 
                            expand_factor=self.args.expand)
         self.backbone = Mamba(config)
-        self.head = MambaHead(d_model=self.d_model, dropout=0.0)
+        self.head = MambaHead(d_model=self.d_model, dropout=self.args.dropout)
         
     def forward(self, x):
         sequence_output = self.backbone(x)  # (batch_size, seq_len, d_model)

@@ -43,7 +43,7 @@ class MambaHead(nn.Module):
     #     # Final layer
     #     return x
     
-    def __init__(self, d_model: int, dropout: float = 0.0):  # Bỏ output_size, đặt dropout=0
+    def __init__(self, d_model: int, dropout: float = 0.0):
         super().__init__()
         self.norm = nn.LayerNorm(d_model)
         self.dropout = nn.Dropout(dropout)
