@@ -8,12 +8,14 @@ from einops import rearrange, repeat
 
 try:
     from causal_conv1d import causal_conv1d_fn
-    from causal_conv1d.cpp_functions import causal_conv1d_fwd_function, causal_conv1d_bwd_function, causal_conv1d_update_function
+    # from causal_conv1d.cpp_functions import causal_conv1d_fwd_function, causal_conv1d_bwd_function, causal_conv1d_update_function
+    from causal_conv1d_cuda import causal_conv1d_fwd_function, causal_conv1d_bwd_function
+
 except ImportError:
     causal_conv1d_fn = None
     causal_conv1d_fwd_function = None
     causal_conv1d_bwd_function = None
-    causal_conv1d_update_function = None
+    # causal_conv1d_update_function = None
 
 from mamba_ssm.ops.triton.layer_norm import _layer_norm_fwd
 
@@ -192,8 +194,6 @@ class MambaInnerFn(torch.autograd.Function):
         """
              xz: (batch, dim, seqlen)
         """
-        from causal_conv1d import causal_conv1d_fn
-        causal_conv1d_fwd_function = causal_conv1d_fn
         assert causal_conv1d_fwd_function is not None, "causal_conv1d_cuda is not available. Please install causal-conv1d."
         assert checkpoint_lvl in [0, 1]
         L = xz.shape[-1]
