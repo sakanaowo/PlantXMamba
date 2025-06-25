@@ -4,7 +4,7 @@ import torchvision.models as models
 from torchvision.models import VGG16_Weights
 
 
-from mamba_ssm import Mamba2
+from mamba_block.model import Mamba2
 
 class InceptionBlock(nn.Module):
     def __init__(self, in_channels=128):
