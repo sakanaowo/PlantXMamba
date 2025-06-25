@@ -4,7 +4,6 @@ import torchvision.models as models
 from torchvision.models import VGG16_Weights
 
 from mamba_block.model import MambaModule
-from mamba_args import MambaArgs  # Giả sử MambaArgs được định nghĩa trong mamba_args.py
 
 class InceptionBlock(nn.Module):
     def __init__(self, in_channels=128):
@@ -71,7 +70,7 @@ class PatchEmbedding(nn.Module):
         return self.proj(x)  # shape: (b, num_patches, emb_size)
 
 class PlantXMamba(nn.Module):
-    def __init__(self, num_classes=4, patch_size=5, emb_size=16, num_blocks=4, dropout=0.1):
+    def __init__(self, num_classes=4, patch_size=5, emb_size=16, d_state=64,d_conv=64,expand=4,n_layers=2,num_blocks=4, dropout=0.1):
         super().__init__()
 
         # VGG16 (2 blocks)
@@ -85,14 +84,13 @@ class PlantXMamba(nn.Module):
         self.patch_embed = PatchEmbedding(in_channels=512, patch_size=patch_size, emb_size=emb_size)
 
         # Mamba blocks
-        mamba_args = MambaArgs(
-            d_model=emb_size,
-            n_layers=num_blocks,
-            d_state=16,
-            d_conv=4,
-            expand=2,
-            dropout=dropout
-        )
+        mamba_args = type('Args', (), {
+            'd_model': emb_size,
+            'd_state': d_state,
+            'd_conv': d_conv,
+            'expand': expand,
+            'n_layers': n_layers
+        })()
         self.mamba = nn.Sequential(*[MambaModule(mamba_args) for _ in range(num_blocks)])
 
         # Classification head
