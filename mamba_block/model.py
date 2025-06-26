@@ -62,7 +62,7 @@ class MambaModule(nn.Module):
         
         config = MambaConfig(d_model=self.d_model, n_layers=self.n_layers, 
                            d_state=self.args.d_state, d_conv=self.args.d_conv, 
-                           expand_factor=self.args.expand)
+                           expand_factor=self.args.expand,dropout=self.args.dropout)
         self.backbone = Mamba(config)
         self.head = MambaHead(d_model=self.d_model, dropout=self.args.dropout)
         

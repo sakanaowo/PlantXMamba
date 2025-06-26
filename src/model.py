@@ -3,7 +3,7 @@ import torch.nn as nn
 import torchvision.models as models
 from torchvision.models import VGG16_Weights
 
-from mamba_block.model import MambaModule
+# from mamba_block.model import MambaModule
 
 class InceptionBlock(nn.Module):
     def __init__(self, in_channels=128):
@@ -89,7 +89,8 @@ class PlantXMamba(nn.Module):
             'd_state': d_state,
             'd_conv': d_conv,
             'expand': expand,
-            'n_layers': n_layers
+            'n_layers': n_layers,
+            'dropout': dropout
         })()
         self.mamba = nn.Sequential(*[MambaModule(mamba_args) for _ in range(num_blocks)])
 
@@ -110,7 +111,7 @@ class PlantXMamba(nn.Module):
 
 # Kiểm tra mô hình
 if __name__ == "__main__":
-    model = PlantXMamba(num_classes=4, patch_size=5, emb_size=16, num_blocks=4, dropout=0.1)
+    model = PlantXMamba(num_classes=4, patch_size=5, emb_size=16, num_blocks=4)
     dummy_input = torch.randn(1, 3, 224, 224)
     output = model(dummy_input)
     print("Output shape:", output.shape)  # Nên là (1, 4)
