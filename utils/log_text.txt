@@ -1,0 +1,114 @@
+Epoch 1/50
+Train Loss: 1.9526 | Acc: 0.6915
+Val   Loss: 1.0667 | Acc: 0.8500
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 2/50
+Training: 100%|██████████| 2375/2375 [01:57<00:00, 20.15it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.51it/s]
+Train Loss: 0.8398 | Acc: 0.8836
+Val   Loss: 0.4511 | Acc: 0.9247
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 3/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.11it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.84it/s]
+Train Loss: 0.3820 | Acc: 0.9453
+Val   Loss: 0.2384 | Acc: 0.9527
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 4/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.03it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.71it/s]
+Train Loss: 0.1908 | Acc: 0.9712
+Val   Loss: 0.1464 | Acc: 0.9632
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 5/50
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.34it/s]
+Train Loss: 0.1067 | Acc: 0.9837
+Val   Loss: 0.1231 | Acc: 0.9682
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 6/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.02it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.23it/s]
+Train Loss: 0.0676 | Acc: 0.9891
+Val   Loss: 0.1219 | Acc: 0.9637
+
+Epoch 7/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.01it/s]
+Evaluating: 100%|██████████| 510/510 [00:18<00:00, 26.89it/s]
+Train Loss: 0.0458 | Acc: 0.9924
+Val   Loss: 0.0856 | Acc: 0.9742
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 8/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.02it/s]
+Evaluating: 100%|██████████| 510/510 [00:18<00:00, 27.08it/s]
+Train Loss: 0.0388 | Acc: 0.9928
+Val   Loss: 0.0909 | Acc: 0.9740
+
+Epoch 9/50
+Training: 100%|██████████| 2375/2375 [01:57<00:00, 20.14it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.61it/s]
+Train Loss: 0.0324 | Acc: 0.9937
+Val   Loss: 0.0791 | Acc: 0.9780
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 10/50
+Training: 100%|██████████| 2375/2375 [01:59<00:00, 19.85it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.41it/s]
+Train Loss: 0.0303 | Acc: 0.9926
+Val   Loss: 0.0980 | Acc: 0.9714
+
+Epoch 11/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.10it/s]
+Evaluating: 100%|██████████| 510/510 [00:18<00:00, 27.19it/s]
+Train Loss: 0.0262 | Acc: 0.9941
+Val   Loss: 0.0944 | Acc: 0.9732
+
+Epoch 12/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.09it/s]
+Evaluating: 100%|██████████| 510/510 [00:18<00:00, 26.87it/s]
+Train Loss: 0.0210 | Acc: 0.9954
+Val   Loss: 0.0723 | Acc: 0.9783
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 13/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.01it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.43it/s]
+Train Loss: 0.0213 | Acc: 0.9953
+Val   Loss: 0.0657 | Acc: 0.9813
+✅ Saved best model to ./outputs/plantVillage/models/InceptionMamba_296_plantvillage.pth
+
+Epoch 14/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.04it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.43it/s]
+Train Loss: 0.0202 | Acc: 0.9948
+Val   Loss: 0.0733 | Acc: 0.9799
+
+Epoch 15/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.05it/s]
+Evaluating: 100%|██████████| 510/510 [00:18<00:00, 26.95it/s]
+Train Loss: 0.0164 | Acc: 0.9959
+Val   Loss: 0.0774 | Acc: 0.9802
+
+Epoch 16/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.03it/s]
+Evaluating: 100%|██████████| 510/510 [00:18<00:00, 26.97it/s]
+Train Loss: 0.0169 | Acc: 0.9960
+Val   Loss: 0.0942 | Acc: 0.9745
+
+Epoch 17/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.04it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.48it/s]
+Train Loss: 0.0169 | Acc: 0.9960
+Val   Loss: 0.1181 | Acc: 0.9693
+
+Epoch 18/50
+Training: 100%|██████████| 2375/2375 [01:58<00:00, 20.08it/s]
+Evaluating: 100%|██████████| 510/510 [00:19<00:00, 26.47it/s]
+Train Loss: 0.0158 | Acc: 0.9962
+Val   Loss: 0.1020 | Acc: 0.9721
+Early stopping at epoch 18
